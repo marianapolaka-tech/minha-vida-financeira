@@ -1,0 +1,19 @@
+{
+  "name": "Minha Vida Financeira",
+  "short_name": "Minha Financeira",
+  "description": "Controle financeiro pessoal",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fbf9fc",
+  "theme_color": "#76509b",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

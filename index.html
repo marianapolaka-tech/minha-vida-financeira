@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#76509b">
+  <meta name="description" content="Seu controle financeiro pessoal, simples e organizado.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>Minha Vida Financeira</title>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">✦</div>
+    <div><h1>Minha Vida Financeira</h1><p>Seu dinheiro, no seu ritmo.</p></div>
+    <button id="installBtn" class="icon-btn" hidden aria-label="Instalar aplicativo">＋</button>
+  </header>
+
+  <main>
+    <section class="hero card">
+      <div class="eyebrow">SALDO PLANEJADO DO MÊS</div>
+      <div id="balance" class="balance">R$ 0,00</div>
+      <div class="hero-sub"><span id="incomeTotal">R$ 0,00</span> de entradas <span class="dot">•</span> <span id="expenseTotal">R$ 0,00</span> de despesas</div>
+      <div class="hero-actions">
+        <button class="primary" data-open="transaction" data-kind="income">＋ Nova entrada</button>
+        <button class="secondary" data-open="transaction" data-kind="expense">− Nova despesa</button>
+      </div>
+    </section>
+
+    <nav class="tabs" aria-label="Navegação principal">
+      <button class="tab active" data-tab="inicio">Início</button>
+      <button class="tab" data-tab="movimentos">Movimentações</button>
+      <button class="tab" data-tab="contas">Contas</button>
+      <button class="tab" data-tab="metas">Metas</button>
+    </nav>
+
+    <section id="inicio" class="page active">
+      <div class="section-heading"><h2>Resumo</h2><span class="pill">Novembro 2026</span></div>
+      <div class="stats-grid">
+        <article class="stat card"><span>Entradas</span><strong class="green" id="statIncome">R$ 0,00</strong></article>
+        <article class="stat card"><span>Despesas</span><strong id="statExpense">R$ 0,00</strong></article>
+        <article class="stat card"><span>Reserva atual</span><strong id="statReserve">R$ 0,00</strong></article>
+        <article class="stat card"><span>Dívida restante</span><strong id="statDebt">R$ 0,00</strong></article>
+      </div>
+      <article class="card">
+        <div class="section-heading"><h2>Próximos recebimentos</h2><span class="small-muted">Todo mês</span></div>
+        <div class="list-row"><div><b>Dia 05 · Consultório</b><small>Salário</small></div><strong>R$ 0,00</strong></div>
+        <div class="list-row"><div><b>Dia 15 · Hospital + consultório</b><small>Dois recebimentos</small></div><strong>R$ 0,00</strong></div>
+        <div class="list-row"><div><b>Dia 30 · Hospital</b><small>Após descontos fixos, antes do plano de saúde</small></div><strong>R$ 0,00</strong></div>
+      </article>
+      <article class="card">
+        <div class="section-heading"><h2>Visão da reserva</h2><span class="small-muted">Meta inicial</span></div>
+        <div class="progress-label"><b id="reserveProgressText">R$ 0 de R$ 1.000</b><span id="reservePercent">0%</span></div>
+        <div class="progress"><span id="reserveProgress" style="width:0%"></span></div>
+        <p class="hint">Sua reserva fica separada do dinheiro das contas. Registre aqui quando fizer novos depósitos ou resgates.</p>
+      </article>
+    </section>
+
+    <section id="movimentos" class="page">
+      <div class="section-heading"><h2>Movimentações</h2><button class="text-btn" data-open="transaction" data-kind="expense">＋ Adicionar</button></div>
+      <div class="filters"><button class="filter active" data-filter="all">Todas</button><button class="filter" data-filter="income">Entradas</button><button class="filter" data-filter="expense">Despesas</button></div>
+      <div id="transactionList" class="card list-card"><p class="empty">Seus lançamentos aparecerão aqui.</p></div>
+    </section>
+
+    <section id="contas" class="page">
+      <div class="section-heading"><h2>Contas recorrentes</h2><span class="small-muted">Valores planejados</span></div>
+      <div id="billList" class="card list-card"></div>
+      <article class="card debt-card">
+        <div class="section-heading"><h2>Renegociação Sicredi</h2><span class="pill warning">Em andamento</span></div>
+        <div class="debt-number" id="debtRemaining">R$ 0,00</div>
+        <p class="hint">11 parcelas restantes de R$ 598,51 (12 contratadas; 1 paga).</p>
+        <div class="progress"><span id="debtProgress" style="width:8.33%"></span></div>
+        <p class="hint">Antes de antecipar, peça ao banco o saldo para quitação e o desconto oferecido.</p>
+      </article>
+    </section>
+
+    <section id="metas" class="page">
+      <div class="section-heading"><h2>Minhas metas</h2></div>
+      <article class="card">
+        <div class="goal-icon">♧</div><h3>Reserva de emergência</h3>
+        <div class="goal-amount" id="goalAmount">R$ 0,00</div>
+        <p class="hint">Meta inicial: R$ 1.000,00</p>
+        <div class="progress"><span id="goalProgress" style="width:0%"></span></div>
+        <button class="primary full" data-open="reserve">Registrar depósito ou resgate</button>
+      </article>
+      <article class="card">
+        <h3>Próxima etapa</h3>
+        <p class="hint">Depois da primeira meta, podemos definir uma reserva equivalente a alguns meses das suas despesas essenciais.</p>
+      </article>
+    </section>
+
+    <section class="tools card">
+      <div class="section-heading"><h2>Seus dados</h2><span class="small-muted">Backup local</span></div>
+      <p class="hint">Os dados ficam armazenados neste navegador e neste aparelho. Exporte uma cópia de segurança regularmente.</p>
+      <div class="tool-actions">
+        <button class="secondary" id="exportBtn">Baixar backup</button>
+        <label class="secondary file-label">Restaurar backup<input id="importFile" type="file" accept="application/json"></label>
+        <button class="danger-outline" id="resetBtn">Restaurar dados iniciais</button>
+      </div>
+      <p id="backupStatus" class="small-muted" role="status"></p>
+    </section>
+  </main>
+
+  <dialog id="transactionDialog">
+    <form id="transactionForm" method="dialog">
+      <div class="modal-head"><h2 id="transactionTitle">Nova despesa</h2><button type="button" class="close" data-close>×</button></div>
+      <input type="hidden" id="transactionKind" value="expense">
+      <label>Valor (R$)<input id="transactionAmount" inputmode="decimal" placeholder="0,00" required></label>
+      <label>Categoria<select id="transactionCategory"></select></label>
+      <label>Descrição<input id="transactionDescription" placeholder="Ex.: Uber para o trabalho"></label>
+      <label>Data<input id="transactionDate" type="date" required></label>
+      <button class="primary full" type="submit">Salvar lançamento</button>
+    </form>
+  </dialog>
+
+  <dialog id="reserveDialog">
+    <form id="reserveForm" method="dialog">
+      <div class="modal-head"><h2>Movimentar reserva</h2><button type="button" class="close" data-close>×</button></div>
+      <label>Tipo<select id="reserveKind"><option value="add">Depósito</option><option value="remove">Resgate</option></select></label>
+      <label>Valor (R$)<input id="reserveAmount" inputmode="decimal" placeholder="0,00" required></label>
+      <button class="primary full" type="submit">Atualizar reserva</button>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status"></div>
+  <footer>Feito para cuidar do seu dinheiro com carinho. <span>✦</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>
